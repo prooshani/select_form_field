@@ -210,17 +210,45 @@ class SelectFormField extends FormField<String> {
 
             final InputDecoration effectiveDecoration = (decoration ??
                 InputDecoration(
+                  border: OutlineInputBorder(
+                    gapPadding: 5,
+                    borderRadius: BorderRadius.all(Radius.circular(12.0)),
+                  ),
                   labelText: labelText,
                   icon: state._icon ?? icon,
                   hintText: hintText,
-                  suffixIcon: Container(
-                    width: 10,
-                    margin: EdgeInsets.all(0),
-                    child: TextButton(
-                      onPressed: () {},
-                      child: Icon(Icons.arrow_drop_down),
-                    ),
+                  suffix: IconButton(
+                    icon: Icon(Icons.arrow_drop_down_circle_outlined),
+                    onPressed: () {
+                      if (type == SelectFormFieldType.dropdown) {
+                        state._showSelectFormFieldMenu();
+                      } else {
+                        state._showSelectFormFieldDialog();
+                      }
+                    },
                   ),
+                  // suffixIcon: Container(
+                  //   width: 10,
+                  //   margin: EdgeInsets.all(0),
+                  //   child: TextButton(
+                  //     onPressed: () {
+                  //       print('dropdownlist loads here');
+                  //       //if(readOnly==false){
+                  //         state._showSelectFormFieldDialog();
+                  //
+                  //         ///
+                  //         // switch (peType) {
+                  //         //   case SelectFormFieldType.dialog:
+                  //         //     state._showSelectFormFieldDialog;
+                  //         //     break;
+                  //         //   default:
+                  //         //     state._showSelectFormFieldMenu;
+                  //         // }
+                  //     //}
+                  //     },
+                  //     child: Icon(Icons.arrow_drop_down),
+                  //   ),
+                  // ),
                 ));
             effectiveDecoration.applyDefaults(
               Theme.of(field.context).inputDecorationTheme,
@@ -262,7 +290,7 @@ class SelectFormField extends FormField<String> {
                 textCapitalization: textCapitalization,
                 autofocus: autofocus,
                 toolbarOptions: toolbarOptions,
-                readOnly: true,
+                readOnly: false,
                 showCursor: showCursor,
                 obscureText: obscureText,
                 autocorrect: autocorrect,
@@ -281,7 +309,7 @@ class SelectFormField extends FormField<String> {
                 expands: expands,
                 maxLength: maxLength,
                 onChanged: onChangedHandler,
-                onTap: readOnly ? null : lfOnTap,
+                //onTap: readOnly ? null : lfOnTap,
                 onEditingComplete: onEditingComplete,
                 onSubmitted: onFieldSubmitted,
                 inputFormatters: inputFormatters,
