@@ -454,23 +454,31 @@ class _SelectFormFieldState extends FormFieldState<String> {
       widget.controller?.addListener(_handleControllerChanged);
     }
 
-    if (_effectiveController?.text != null &&
-        _effectiveController?.text != '') {
-      _item = widget.items?.firstWhere(
-          (lmItem) => lmItem['value'].toString() == _effectiveController?.text,
-          orElse: () => <String, dynamic>{});
+    /// set textfield controller's text to initialValue
+    ///
+    var initVal = _effectiveController!.text;
+    _labelController.text = initVal;
 
-      if (_item!.length > 0) {
-        _labelController.text =
-            _item!['label']?.toString() ?? _item!['value']!.toString();
+//     if (_effectiveController?.text != null &&
+//         _effectiveController?.text != '') {
+//       _item = widget.items?.firstWhere(
+//           (lmItem) => lmItem['value'].toString() == _effectiveController?.text,
+//           orElse: () => <String, dynamic>{});
+//
+//       if (_item!.length > 0) {
+//
+//         /// _labelController.text =
+//         ///     _item!['label']?.toString() ?? _item!['value']!.toString();
 
-        if (widget.changeIcon &&
-            _item?['icon'] != null &&
-            _item?['icon'] != '') {
-          _icon = _item?['icon'];
-        }
-      }
-    }
+//
+//
+//         if (widget.changeIcon &&
+//             _item?['icon'] != null &&
+//             _item?['icon'] != '') {
+//           _icon = _item?['icon'];
+//         }
+//       }
+//     }
   }
 
   @override
@@ -495,6 +503,7 @@ class _SelectFormFieldState extends FormFieldState<String> {
       }
     }
 
+    ///
     if (_effectiveController?.text != null &&
         _effectiveController?.text != '') {
       _item = widget.items?.firstWhere(
@@ -503,8 +512,8 @@ class _SelectFormFieldState extends FormFieldState<String> {
       );
 
       if (_item!.length > 0) {
-        _labelController.text =
-            _item!['label']?.toString() ?? _item!['value']!.toString();
+        /// _labelController.text =
+        ///     _item!['label']?.toString() ?? _item!['value']!.toString();
 
         if (widget.changeIcon &&
             _item?['icon'] != null &&
